@@ -48,7 +48,7 @@ pub enum VaultState{
 
 
 #[repr(C)]
-#[derive(Clone, BorshSerialize, BorshDeserialize)]
+#[derive(Clone, BorshSerialize, BorshDeserialize,PartialEq, PartialOrd)]
  pub enum Address {
      EthAddress(String),//0x erc20 => solana => solang 
      SolAddress(Pubkey)//solang erc20 -> solana 
@@ -66,7 +66,7 @@ pub enum VaultState{
 
                 
 #[repr(C)]
-#[derive(Clone, BorshSerialize, BorshDeserialize)]
+#[derive(Clone, BorshSerialize, BorshDeserialize,PartialEq, PartialOrd)]
 
 pub struct  ERC20 {
   
@@ -80,7 +80,7 @@ pub struct  ERC20 {
 
 
 #[repr(C)]
-#[derive(Clone, BorshSerialize, BorshDeserialize)]
+#[derive(Clone, BorshSerialize, BorshDeserialize,PartialEq, PartialOrd)]
 
 pub struct  Owner {
   
@@ -104,9 +104,11 @@ pub struct Vault{
      pub amount:i32,
      pub lock:bool,
      pub limit:i32,  
+     pub id:i32
       
 
 }
+
 
 
 

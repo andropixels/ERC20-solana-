@@ -1,6 +1,6 @@
 use {
     crate::{
-        // error::VaultError,
+        error::VaultError,
         instruction::VaultInstruction,
         state::{
             Vault, VaultState,PREFIX,ERC20,Address
@@ -35,6 +35,11 @@ pub fn process_instruction(
             msg!("Instruction: Init Vault");
             process_init_vault(program_id, accounts, args.id,args.EthAddress.as_str())
         },
+        VaultInstruction::UnlockVault(args) => {
+            msg!("Instruction: UnlockVault");
+             process_unlock_vault(program_id,accounts,args.id,args.Owner)
+        }
+
         _ => todo!(),
 
         
@@ -74,18 +79,7 @@ pub fn process_init_vault(
     ];
     let (authority, _) = Pubkey::find_program_address(seeds, program_id);
     
-  //PDA => program derivalble account   
-  // authority => public key 
-
-    // vault.token_program = *token_program_info.key;
-    // vault.redeem_treasury = *redeem_treasury_info.key;
-    // vault.fraction_treasury = *fraction_treasury_info.key;
-    // vault.fraction_mint = *fraction_mint_info.key;
-    // vault.pricing_lookup_address = *pricing_lookup_address.key;
-    // vault.allow_further_share_creation = allow_further_share_creation;
-    // vault.Owner = *authority_info.key;
-    // vault.token_type_count = 0;
-    // vault.state = VaultState::Inactive;
+  
      vault.Erc20 =  ERC20{
             EthERC:Address::EthAddress(EthERC20.to_owned()),
             SolERC:Address::SolAddress(authority)
@@ -94,6 +88,7 @@ pub fn process_init_vault(
      vault.amount = 0;  
      vault.lock = true ;
      vault.limit = 1000; // tokens 
+     vault.id  = id ; 
      vault.serialize(&mut *vault_info.data.borrow_mut())?;
     // let fraction_mint: Mint = assert_initialized(fraction_mint_info)?;
     // let redeem_treasury: Account = assert_initialized(redeem_treasury_info)?;
@@ -105,8 +100,32 @@ pub fn process_init_vault(
 }
 
 
+pub fn process_unlock_vault(
+    program_id: &Pubkey,
+    accounts: &[AccountInfo],
+    id:i32,
+    authority: Pubkey
+
+)-> ProgramResult{
+    let account_info_iter = &mut accounts.iter();
+    let vault_info = next_account_info(account_info_iter)?;
+    // let vault_authority_info = next_account_info(account_info_iter)?;
+    let mut vault = Vault::from_account_info(vault_info)?;
+    let  authority = Address::SolAddress(authority);
+    if vault.withdrawer.SolOwner != authority {
+         return Err(VaultError::InvalidAuthority.into());
+    }
+    if vault.id != id {
+        return Err(VaultError::InvalidID.into());
+    }
+    vault.lock = false ; 
+
+    Ok(())
+}
+
 
 
 //erc 20 vault  
+
 
 

@@ -31,13 +31,21 @@ pub struct VaultID {
 }
 
 
+#[repr(C)]
+#[derive(BorshSerialize, BorshDeserialize, Clone,PartialEq, PartialOrd)]
+pub struct keys{
+
+  pub id:i32,
+  pub Owner:Pubkey
+}
+
 
 /// Instructions supported by the Fraction program.
 #[derive(BorshSerialize, BorshDeserialize, Clone)]
 pub enum VaultInstruction{
 
     InitVault(VaultID),
-    AddTokenToVault
+    UnlockVault(keys)
 
 
 }
@@ -65,6 +73,34 @@ pub fn try_from_slice_checked<T: BorshDeserialize>(
 
 
 
+
+#[allow(clippy::too_many_arguments)]
+pub fn create_unlock_vault_instruction( 
+    
+    program_id: Pubkey,
+    authority: Pubkey,
+    vault_id:i32
+
+
+
+) -> Instruction{
+
+   Instruction {
+    program_id,
+accounts: vec![
+       
+    AccountMeta::new(authority, false),
+     
+        ],
+  data:VaultInstruction::UnlockVault(keys{
+      id:vault_id,
+      Owner:authority
+  }).try_to_vec().unwrap(),
+   }
+}
+
+
+
 /// Creates an InitVault instruction
 #[allow(clippy::too_many_arguments)]
 pub fn create_init_vault_instruction(
@@ -87,11 +123,13 @@ pub fn create_init_vault_instruction(
         ],
         data: VaultInstruction::InitVault(VaultID {
             id:counter+1, // i32 0 1 2
-            EthAddress:String::from("") // ox 
+            EthAddress:ERC20.to_owned() // ox 
         })
         .try_to_vec()
         .unwrap(),
     }
 
 }
+
+
 
