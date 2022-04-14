@@ -20,6 +20,15 @@ pub enum VaultError {
 
     #[error("Derived key invalid")]
     InvalidID
+
+
+    #[error("not a owner")]
+    NotAOwner
+
+
+
+    #[error("blacklisted")]
+    BlackListed
 }
 
 impl PrintProgramError for VaultError {
