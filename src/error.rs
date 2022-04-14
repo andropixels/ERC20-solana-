@@ -29,6 +29,11 @@ pub enum VaultError {
 
     #[error("blacklisted")]
     BlackListed
+
+
+
+    #[error("NotAnerror")]
+    NotAnerror
 }
 
 impl PrintProgramError for VaultError {
