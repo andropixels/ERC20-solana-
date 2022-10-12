@@ -9,7 +9,7 @@ use {
     },
 };
 // use crate::processor::Processor;
-//EVM  => BPF 
+
 
 entrypoint!(process_instruction);
 fn process_instruction(
