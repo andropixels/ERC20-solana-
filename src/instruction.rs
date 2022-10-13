@@ -45,7 +45,8 @@ pub struct keys{
 pub enum VaultInstruction{
 
     InitVault(VaultID),
-    UnlockVault(keys)
+    UnlockVault(keys),
+//    AddTokenToInactiveVault(args)
 
 
 }
