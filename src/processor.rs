@@ -29,6 +29,8 @@ pub fn process_instruction(
     accounts: &[AccountInfo],
     input: &[u8],
 ) -> ProgramResult {
+    
+    
     let instruction = VaultInstruction::try_from_slice(input)?;
     match instruction {
         VaultInstruction::InitVault(args) => {
@@ -43,10 +45,10 @@ pub fn process_instruction(
         _ => todo!(),
 
         
-        // VaultInstruction::AddTokenToInactiveVault(args) => {
-        //     msg!("Instruction: Add token to vault");
-        //     process_add_token_to_inactivated_vault(program_id, accounts, args.amount)
-        // }
+        VaultInstruction::AddTokenToInactiveVault(args) => {
+            msg!("Instruction: Add token to vault");
+            process_add_token_to_inactivated_vault(program_id, accounts, args.amount)
+        }
       
     }
 }
