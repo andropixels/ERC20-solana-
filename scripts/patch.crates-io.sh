@@ -42,6 +42,8 @@ for crate in "${workspace_crates[@]}"; do
     echo "* patched $crate"
     cat >> "$crate" <<PATCH
 [patch.crates-io]
+
+
 solana-clap-utils = {path = "$solana_dir/clap-utils" }
 solana-cli-config = {path = "$solana_dir/cli-config" }
 solana-client = { path = "$solana_dir/client"}
