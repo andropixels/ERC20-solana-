@@ -9,7 +9,7 @@ use {
     solana_sdk::{signature::Signer, transaction::Transaction},
     solana_validator::test_validator::*,
 };
-//default test
+
 #[test]
 fn test_validator_transaction() {
     solana_logger::setup_with_default("solana_program_runtime=debug");
