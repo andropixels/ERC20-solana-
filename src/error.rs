@@ -10,7 +10,7 @@ use {
     thiserror::Error,
 };
 
-/// Errors that may be returned by the Vault program.
+
 #[derive(Clone, Debug, Eq, Error, PartialEq)]
 pub enum VaultError {
    
