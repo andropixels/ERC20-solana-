@@ -16,9 +16,7 @@ use solana_program::program_error::ProgramError;
 use std::convert::TryInto;
 
 
-/// spl => erc 
-/// AMM, dspefi spl 
-/// erc 20
+
  
 
 
