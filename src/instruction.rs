@@ -9,8 +9,7 @@ use {
     },
 };
  
-// => serlization vault binary 
-// => deri
+
   
 use solana_program::program_error::ProgramError;
 use std::convert::TryInto;
