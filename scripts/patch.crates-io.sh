@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 #
 # Patches the SPL crates for developing against a local solana monorepo
-
-
 here="$(dirname "$0")"
 
 solana_dir=$1
