@@ -10,7 +10,6 @@ use {
     solana_validator::test_validator::*,
 };
 
-// test
 
 [test]
 fn test_validator_transaction() {
