@@ -8,8 +8,6 @@ use {
         program_error::PrintProgramError, pubkey::Pubkey,
     },
 };
-
-
 entrypoint!(process_instruction);
 fn process_instruction(
     program_id: &Pubkey,
