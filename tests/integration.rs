@@ -10,7 +10,6 @@ use {
     solana_validator::test_validator::*,
 };
 
-
 [test]
 fn test_validator_transaction() {
     solana_logger::setup_with_default("solana_program_runtime=debug");
