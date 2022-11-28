@@ -8,7 +8,7 @@ use {
     },
     solana_sdk::{signature::Signer, transaction::Transaction},
     solana_validator::test_validator::*,
-};
+
 
 [test]
 fn test_validator_transaction() {
